@@ -23,14 +23,30 @@ const Currency = () => {
           throw new Error("Fail to fetch exchange rate");
         }
         const data = await response.json();
-        console.log(data);
+        setExchangeRates(data.conversion_rates || {});
       } catch (error) {
         console.log("Error in fetching exchage rates", error);
       }
     }
 
     fetchExchangeRates();
-  }, [currency1, currency2]);
+  }, []);
+
+  // Currency Converter Function
+  const convertCurrency = (amount, fromCurrency, toCurrency) => {
+    if (fromCurrency === toCurrency) {
+      return amount;
+    }
+
+    return amount * exchangeRates[toCurrency].toFixed(2);
+  };
+
+  useEffect(() => {
+    if (exchangeRates[currency1] && exchangeRates[currency2]) {
+      const convertedAmount = convertCurrency(amount1, currency1, currency2);
+      setAmount2(convertedAmount);
+    }
+  }, [amount1, currency1, currency2, exchangeRates]);
 
   return <div>Currency</div>;
 };
