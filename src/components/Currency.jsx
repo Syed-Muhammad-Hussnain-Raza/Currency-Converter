@@ -48,7 +48,46 @@ const Currency = () => {
     }
   }, [amount1, currency1, currency2, exchangeRates]);
 
-  return <div>Currency</div>;
+  return (
+    <div className="flex flex-row mt-8  gap-x-12">
+      <div className="border-black border-2 rounded-lg p-1 bg-white">
+        <select
+          className="bg-black text-white rounded-lg p-1"
+          value={currency1}
+          onChange={(e) => setCurrency1(e.target.value)}
+        >
+          {Object.keys(exchangeRates).map((country) => (
+            <option key={country}>{country}</option>
+          ))}
+        </select>
+        <input
+          className="ml-3 border-b-2 border-blue-700 outline-none"
+          type="number"
+          value={amount1}
+          onChange={(e) => setAmount1(e.target.value)}
+        />
+      </div>
+      <div className="border-black border-2 rounded-lg p-1 bg-white">
+        <select
+          className="bg-black text-white rounded-lg p-1"
+          value={currency2}
+          onChange={(e) => setCurrency2(e.target.value)}
+        >
+          {Object.keys(exchangeRates).map((country) => (
+            <option key={country} value={country}>
+              {country}
+            </option>
+          ))}
+        </select>
+        <input
+          className="ml-3 border-b-2 border-blue-700 outline-none"
+          type="number"
+          value={amount2}
+          onChange={(e) => setAmount2(e.target.value)}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Currency;
