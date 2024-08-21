@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const URL =
   "https://v6.exchangerate-api.com/v6/54b6fdad5466b3aa0be0dccc/latest/USD";
@@ -23,7 +22,7 @@ const Currency = () => {
           throw new Error("Fail to fetch exchange rate");
         }
         const data = await response.json();
-        setExchangeRates(data.conversion_rates || {});
+        setExchangeRates(data.conversion_rates);
       } catch (error) {
         console.log("Error in fetching exchage rates", error);
       }
@@ -34,17 +33,22 @@ const Currency = () => {
 
   // Currency Converter Function
   const convertCurrency = (amount, fromCurrency, toCurrency) => {
-    if (fromCurrency === toCurrency) {
-      return amount;
+    if (!amount || !exchangeRates[fromCurrency] || !exchangeRates[toCurrency]) {
+      return "";
     }
-
-    return amount * exchangeRates[toCurrency].toFixed(2);
+    const convertedAmount = (
+      (amount * exchangeRates[toCurrency]) /
+      exchangeRates[fromCurrency]
+    ).toFixed(2);
+    return convertedAmount;
   };
 
   useEffect(() => {
-    if (exchangeRates[currency1] && exchangeRates[currency2]) {
+    if (amount1 !== "") {
       const convertedAmount = convertCurrency(amount1, currency1, currency2);
       setAmount2(convertedAmount);
+    } else {
+      setAmount2("");
     }
   }, [amount1, currency1, currency2, exchangeRates]);
 
@@ -57,7 +61,9 @@ const Currency = () => {
           onChange={(e) => setCurrency1(e.target.value)}
         >
           {Object.keys(exchangeRates).map((country) => (
-            <option key={country}>{country}</option>
+            <option key={country} value={country}>
+              {country}
+            </option>
           ))}
         </select>
         <input
