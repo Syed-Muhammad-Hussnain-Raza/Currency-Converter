@@ -49,3 +49,7 @@ To run this project locally, follow these steps:
 ## Author
 
 **Syed Muhammad Hussnain Raza**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
