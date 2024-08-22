@@ -25,7 +25,10 @@ To run this project locally, follow these steps:
    ```bash
    npm install
    ```
-4. Start the development server:
+
+## Usage
+
+1. Start the development server:
 
    ```bash
    npm start
@@ -33,12 +36,9 @@ To run this project locally, follow these steps:
 
    Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-   The page will reload when you make changes. You may also see any lint errors in the console.
+2. Enter an amount in the first input field and select the currency you want to convert from.
 
-## Usage
-
-- Enter an amount in the first input field and select the currency you want to convert from.
-- The converted amount will automatically appear in the second input field based on the selected target currency.
+3. The converted amount will automatically appear in the second input field based on the selected target currency.
 
 ## Technologies Used
 
@@ -48,7 +48,7 @@ To run this project locally, follow these steps:
 
 ## Author
 
-**Syed Muhammad Hussnain Raza**
+**[Syed Muhammad Hussnain Raza](https://www.linkedin.com/in/syed-muhammad-hussnain-raza)**
 
 ## License
 
